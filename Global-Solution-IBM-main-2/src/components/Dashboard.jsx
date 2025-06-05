@@ -4,11 +4,12 @@ import ClimaCard from '../components/cards/ClimaCard';
 import StatusSensorCard from '../components/cards/StatusSensorCard';
 import QuantidadeSensoresCard from '../components/cards/QuantidadeSensoresCard';
 import NivelAguaCard from '../components/cards/NivelAguaCard';
-import MapaCard from '../components/cards/Mapacard';
+import Mapacard from '../components/cards/Mapacard';
 import UmidadeCard from '../components/cards/UmidadeCard';
 import PrecipitacaoCard from '../components/cards/PrecipitacaoCard';
-import Mapacard from './Mapacard';
+import Header from './Header'
 import 'leaflet/dist/leaflet.css';
+
 
 import {
   Chart as ChartJS,
@@ -32,6 +33,8 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
+  const [dadosCidade, setDadosCidade] = useState(null);
+  const [precipitacao, setPrecipitacao] = useState({});
   const [markers, setMarkers] = useState([
     {
       id: 1,
@@ -41,30 +44,23 @@ const Dashboard = () => {
     },
   ]);
   useEffect(() => {
-    const dados = getDadosDaCidade('sao paulo');
-    setDadosCidade(dados);
+  const dados = getDadosDaCidade('sao paulo');
+  setDadosCidade(dados);
 
-    async function fetchPrecipitacao() {
-      try {
-        const response = await fetch("URL_DA_SUA_API_AQUI");
-        const data = await response.json();
-        setPrecipitacao({
-          hoje: data.hoje,
-          terca: data.terca,
-          quarta: data.quarta,
-          quinta: data.quinta,
-        });
-      } catch (error) {
-        console.error("Erro ao buscar precipitação:", error);
-      }
-    }
+  const dadosMock = {
+    hoje: 12,
+    terca: 8,
+    quarta: 15,
+    quinta: 0,
+  };
+  setPrecipitacao(dadosMock);
+}, []);
 
-    fetchPrecipitacao();
-  }, []);
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow w-full">
-      <div className="flex flex-wrap gap-4">
+    <div>
+      <Header/>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
         <ClimaCard dadosCidade={dadosCidade} />
         <StatusSensorCard sensor={dadosCidade?.sensor} />
         <QuantidadeSensoresCard />

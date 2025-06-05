@@ -1,60 +1,52 @@
-const Navbar = () => {
-  return (
-    <div className="px-3 py-2 bg-dark text-white">
-      <div className="container">
-        <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <svg className="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-              <use xlinkHref="#bootstrap" />
-            </svg>
-          </a>
+import { BsBootstrap, BsHouse, BsSpeedometer2, BsTable, BsGrid } from "react-icons/bs";
+import { IoMdPerson } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
-          <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+const Header = () => {
+  return (
+    <header className="bg-dark text-white">
+      <div className="">
+        <div className="d-flex flex-wrap align-items-center justify-content-between">
+          <a href="/" className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <img src="src/assets/Icone.png" alt="Logo" width="150"/>
+          </a>
+          <ul className="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
             <li>
-              <a href="#" className="nav-link text-secondary">
-                <svg className="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlinkHref="#home" />
-                </svg>
-                Home
-              </a>
+              <a href="*" className="nav-link px-2 text-white d-flex flex-column align-items-center">
+                <BsHouse className="me-1" />
+                <span>Home</span>
+            </a>
             </li>
             <li>
-              <a href="#" className="nav-link text-white">
-                <svg className="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlinkHref="#speedometer2" />
-                </svg>
+              <a href="/dashboard" className="nav-link px-2 text-white d-flex flex-column align-items-center">
+                <BsSpeedometer2 className="me-1" />
                 Dashboard
               </a>
             </li>
             <li>
-              <a href="#" className="nav-link text-white">
-                <svg className="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlinkHref="#table" />
-                </svg>
-                Orders
+              <Link to="/sensores" className="nav-link px-2 text-white d-flex flex-column align-items-center">
+                <BsTable className="me-1" />
+                Sensores
+              </Link>
+            </li>
+            <li>
+              <a href="/mapa-expandido" className="nav-link px-2 text-white d-flex flex-column align-items-center">
+                <BsGrid className="me-1" />
+                Mapa
               </a>
             </li>
             <li>
-              <a href="#" className="nav-link text-white">
-                <svg className="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlinkHref="#grid" />
-                </svg>
-                Products
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link text-white">
-                <svg className="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlinkHref="#people-circle" />
-                </svg>
-                Customers
+              <a href="/login" className="nav-link px-2 text-white d-flex flex-column align-items-center">
+                <IoMdPerson className="me-1" />
+                Sair
               </a>
             </li>
           </ul>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
-export default Navbar;
+export default Header;
+

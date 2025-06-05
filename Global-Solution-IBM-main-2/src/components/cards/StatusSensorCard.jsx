@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const StatusSensorCard = ({ sensor }) => {
+  const [width, setWidth] = useState('25%');
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (window.innerWidth < 640) {
+        setWidth('100%'); // celular
+      } else if (window.innerWidth < 1024) {
+        setWidth('48%'); // tablet
+      } else {
+        setWidth('24%'); // desktop
+      }
+    };
+
+    updateWidth(); // valor inicial
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
+
   return (
-    <div className="bg-white p-4 rounded-xl shadow w-full sm:w-[48%] lg:w-[24%]">
+    <div
+      className="bg-white p-4 rounded-xl shadow w-full sm:w-[48%] lg:w-[24%] min-w-[200px]"
+      style={{ height: '300px', width }}
+    >
       <h3 className="font-semibold border-b border-gray-300 pb-1 mb-2">Status do Sensor</h3>
       {sensor ? (
         <>
