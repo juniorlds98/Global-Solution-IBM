@@ -56,35 +56,95 @@ A interface do Projeto Alerta Rios foi feito para garantir que as pessoas recebe
 
 ❌ Há página de erro caso entre em funções específicas ou não projetadas
 
+### 📦 Instalação dos pacotes
+```bash
+npm install
+``
 
+### 🚀 Executar o programa com Vite
 
-
+```bash
+npm run dev
+```
+Acesse o front-end em:
+http://localhost:5173
 
 ## ESP32
-A interface se comunica com o módulo ESP32 para notificações e controle de relatórios com a possibilidade de gereniar e visualizar os sensores mais próximos de sua casa, envia dados a cada 5 segundos para nosso back end que por sua vez guarda os dados se for identificado alguma relevancia.
+
+### 📌 Funcionalidades principais
+
+- 🚨 Detectar niveis de água alarmantes
+
+---
+### ⚙️ Requisitos e Instalação
+
+### Fisicamente:
+#### - ESP 32 
+#### - Sensor Ultrasonico
+
+## Back End
+### 📌 Funcionalidades principais
+
+- ☀️ Fiscalizar o clima
+- 🌐 API RESTful com documentação interativa
+
+---
+
+### ⚙️ Requisitos e Instalação
+
+**Versão recomendada do Python:** 3.9
+
+#### 📦 Instalação dos pacotes
+
+```bash
+pip install fastapi
+pip install pandas
+pip install selenium
+pip install uvicorn
+```
+
+---
+## 🛢 Banco de Dados
+### [Modelo pronto para rodar no docker](https://drive.google.com/drive/folders/1mLNyrJprF_lPm-jrlBFLvafd8gqKT574?usp=drive_link)  **executar com o bash**
+```bash
+docker-compose up -d
+```
+---
+### ▶️ Como iniciar o sistema
+
+### 🔥 Permissão no firewall (Windows)
+
+```bash
+netsh advfirewall firewall add rule name="FastAPI" dir=in action=allow protocol=TCP localport=8000
+```
+
+### 🚀 Executar o programa
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+---
+
+## 📡 Endpoints da API
+
+Acesse a documentação interativa em:
+
+[http://127.0.0.8:8000/docs](http://127.0.0.8:8000/docs)
+
 
 # 🆘 Esclarecimentos sobre o projeto
 Nós não desenvolvemos a página Home por não acreditar que traria algo a mais para o nosso projeto, mas, em compensação caprichamos no desenvolvimento de outras páginas com alguns itens a mais, espero que gostem e supra a expectativa!
 
-# 🚀 Instalação e Execução
+# 🚀 Instalação
 1. Clonar o projeto
 bash
 Copiar
 Editar
 git clone [git@github.com:juniorlds98/Global-Solution.git]((https://github.com/juniorlds98/Global-Solution-IBM))
 cd Global-Solution-IBM
-2. Instalar as dependências
-bash
-Copiar
-Editar
-npm install
-3. Executar o projeto com Vite
-bash
-Copiar
-Editar
-npm run dev
-Acesse o front-end em:
-http://localhost:5173
+2. Instalar as dependências desejadas
+
 
 # 👨‍💻 Grupo
 ```
