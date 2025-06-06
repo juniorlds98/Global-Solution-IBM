@@ -14,8 +14,6 @@ async def sensor_receiver(request: Request):
 
     result = service.process_sensor_data(distancia)
     return result
-    
-    
 @clima_route.get("/busca_clima_cidade")
 def cptec_por_cidade(cidade: str):
     """Retorna dados do clima por cidade."""

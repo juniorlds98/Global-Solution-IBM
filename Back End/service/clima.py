@@ -19,12 +19,13 @@ from datetime import datetime, timedelta
 import json
 import os
 
-DATA_FILE = "sensor_data.json"
+DATA_FILE = os.path.join("Back End", "docs", "sensor_data.json")
 DIST_THRESHOLD = 1.0
 TIME_THRESHOLD = timedelta(minutes=5)
 HISTORY_LIMIT = timedelta(hours=24)
 
 def load_data():
+    os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
     if not os.path.exists(DATA_FILE):
         return []
     with open(DATA_FILE, "r") as f:

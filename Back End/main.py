@@ -1,3 +1,7 @@
+#Caio Martinez Saes – 560753
+#José Claudio da Silva Junior - 559680 
+
+
 from fastapi import FastAPI
 from api.__init__ import api_router
 from fastapi.middleware.cors import CORSMiddleware

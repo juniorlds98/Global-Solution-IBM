@@ -33,7 +33,7 @@ void loop()
     float distancia = medirDistanciaCM();
 
     // JSON com os dados
-    String json = "{\"localidade\":\"sp\",\"id\":1,\"distancia\":" + String(distancia, 2) + "\"}";
+    String json = "{\"localidade\":\"sp\",\"id\":1,\"distancia\":" + String(distancia, 2) + "}";
 
     if (WiFi.status() == WL_CONNECTED)
     {
