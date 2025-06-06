@@ -59,7 +59,7 @@ A interface do Projeto Alerta Rios foi feito para garantir que as pessoas recebe
 ### 📦 Instalação dos pacotes
 ```bash
 npm install
-``
+```
 
 ### 🚀 Executar o programa com Vite
 
