@@ -18,7 +18,7 @@ const MapaCard = () => {
       }
     };
 
-    updateWidth(); // inicial
+    updateWidth();
 
     window.addEventListener('resize', updateWidth);
     return () => window.removeEventListener('resize', updateWidth);
@@ -27,7 +27,7 @@ const MapaCard = () => {
 return (
   <div
     className="bg-white p-4 rounded-xl shadow w-full sm:w-[100%] lg:w-[100%] min-w-[200px] relative"
-    style={{ height: '300px', width }}
+    style={{ height: '500px', width }}
   >
     <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ height: '90%', width: '100%' }}>
       <TileLayer

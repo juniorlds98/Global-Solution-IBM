@@ -5,6 +5,7 @@ const SensorModal = ({ sensor, onClose, onSave }) => {
   const [formData, setFormData] = useState({ ...sensor });
   const [medicao, setMedicao] = useState(null);
   const [umidade, setUmidade] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const fetchMockApi = () => {
@@ -13,93 +14,257 @@ const SensorModal = ({ sensor, onClose, onSave }) => {
         setUmidade(Math.floor(Math.random() * 100));
       }, 500);
     };
-
     fetchMockApi();
   }, [sensor]);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     onSave(formData);
   };
 
+
+  const [inputFocus, setInputFocus] = useState({ nome: false, cidade: false, status: false });
+  const [cancelHover, setCancelHover] = useState(false);
+  const [saveHover, setSaveHover] = useState(false);
+  const [closeHover, setCloseHover] = useState(false);
+
+  // Responsividade
+  const modalMaxWidth = windowWidth < 400 ? '90vw' : windowWidth < 600 ? '400px' : '480px';
+  const modalPadding = windowWidth < 400 ? '20px' : '32px';
+
+  // Estilos
+  const backdropStyle = {
+    position: 'fixed',
+    inset: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    backdropFilter: 'blur(8px)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 50,
+    padding: '12px', 
+  };
+
+  const modalStyle = {
+    backgroundColor: '#fff',
+    borderRadius: '24px',
+    boxShadow: '0 25px 50px rgba(0, 0, 0, 0.2)',
+    width: '100%',
+    maxWidth: modalMaxWidth,
+    padding: modalPadding,
+    position: 'relative',
+    maxHeight: '90vh',
+    overflowY: 'auto',
+    boxSizing: 'border-box',
+  };
+
+  const closeBtnStyle = {
+    position: 'absolute',
+    top: '16px',
+    right: '16px',
+    background: 'transparent',
+    border: 'none',
+    fontSize: '28px',
+    color: closeHover ? '#444' : '#888',
+    cursor: 'pointer',
+    transition: 'color 0.2s ease',
+  };
+
+  const titleStyle = {
+    fontSize: '24px',
+    fontWeight: '600',
+    marginBottom: '24px',
+    color: '#111',
+    userSelect: 'none',
+    textAlign: 'center',
+  };
+
+  const formStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '24px',
+  };
+
+  const labelStyle = {
+    fontSize: '14px',
+    fontWeight: '500',
+    color: '#555',
+    marginBottom: '6px',
+    display: 'block',
+  };
+
+  const inputBaseStyle = {
+    width: '100%',
+    padding: '12px 16px',
+    fontSize: '14px',
+    borderRadius: '16px',
+    border: '1.5px solid #ccc',
+    outline: 'none',
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+    boxSizing: 'border-box',
+  };
+
+  const inputFocusStyle = {
+    borderColor: '#3b82f6',
+    boxShadow: '0 0 5px rgba(59, 130, 246, 0.5)',
+  };
+
+  const selectStyle = {
+    ...inputBaseStyle,
+    appearance: 'none',
+    cursor: 'pointer',
+  };
+
+  const infoBoxStyle = {
+    backgroundColor: '#f3f4f6',
+    borderRadius: '16px',
+    padding: '16px',
+    fontSize: '14px',
+    color: '#444',
+    lineHeight: '1.4',
+  };
+
+  const buttonsContainerStyle = {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '16px',
+    marginTop: '24px',
+    flexWrap: 'wrap',
+  };
+
+  const btnBaseStyle = {
+    padding: '12px 24px',
+    fontSize: '14px',
+    fontWeight: '600',
+    borderRadius: '16px',
+    border: 'none',
+    cursor: 'pointer',
+    flex: windowWidth < 400 ? '1 1 100%' : 'auto', 
+  };
+
+  const btnCancelStyle = {
+    ...btnBaseStyle,
+    color: '#555',
+    backgroundColor: cancelHover ? '#d1d5db' : '#e5e7eb',
+  };
+
+  const btnSaveStyle = {
+    ...btnBaseStyle,
+    color: 'white',
+    backgroundColor: saveHover ? '#1e40af' : '#2563eb',
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div style={backdropStyle}>
       <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: -20 }}
+        initial={{ opacity: 0, scale: 0.9, y: -30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: -20 }}
-        transition={{ duration: 0.3 }}
-        className="relative bg-white w-full max-w-md p-6 rounded-2xl shadow-2xl"
+        exit={{ opacity: 0, scale: 0.9, y: -30 }}
+        transition={{ duration: 0.25 }}
+        style={modalStyle}
       >
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-lg"
+          aria-label="Fechar modal"
+          style={closeBtnStyle}
+          onMouseEnter={() => setCloseHover(true)}
+          onMouseLeave={() => setCloseHover(false)}
+          type="button"
         >
-          ✕
+          &times;
         </button>
 
-        <h2 className="text-xl font-semibold mb-4 text-gray-800">🛠️ Editar Sensor</h2>
-        
+        <h2 style={titleStyle}>🛠️ Editar Sensor</h2>
 
-        <div className="space-y-4">
+        <form style={formStyle} onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Nome:</label>
+            <label htmlFor="nome" style={labelStyle}>Nome</label>
             <input
+              id="nome"
               name="nome"
               value={formData.nome}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring focus:ring-blue-300"
+              onFocus={() => setInputFocus(prev => ({ ...prev, nome: true }))}
+              onBlur={() => setInputFocus(prev => ({ ...prev, nome: false }))}
+              style={inputFocus.nome ? { ...inputBaseStyle, ...inputFocusStyle } : inputBaseStyle}
+              placeholder="Nome do sensor"
+              required
+              type="text"
+              autoComplete="off"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Cidade:</label>
+            <label htmlFor="cidade" style={labelStyle}>Cidade</label>
             <input
+              id="cidade"
               name="cidade"
               value={formData.cidade}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring focus:ring-blue-300"
+              onFocus={() => setInputFocus(prev => ({ ...prev, cidade: true }))}
+              onBlur={() => setInputFocus(prev => ({ ...prev, cidade: false }))}
+              style={inputFocus.cidade ? { ...inputBaseStyle, ...inputFocusStyle } : inputBaseStyle}
+              placeholder="Cidade do sensor"
+              required
+              type="text"
+              autoComplete="off"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Status:</label>
+            <label htmlFor="status" style={labelStyle}>Status</label>
             <select
+              id="status"
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring focus:ring-blue-300"
+              onFocus={() => setInputFocus(prev => ({ ...prev, status: true }))}
+              onBlur={() => setInputFocus(prev => ({ ...prev, status: false }))}
+              style={inputFocus.status ? { ...selectStyle, ...inputFocusStyle } : selectStyle}
+              required
             >
-              <option>Ativo</option>
-              <option>Inativo</option>
-              <option>Manutenção</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Inativo">Inativo</option>
+              <option value="Manutenção">Manutenção</option>
             </select>
           </div>
 
-          <div className="bg-gray-100 rounded-lg p-3 text-sm text-gray-700">
+          <div style={infoBoxStyle}>
             <p><strong>Última medição:</strong> {medicao !== null ? `${medicao}%` : 'Carregando...'}</p>
             <p><strong>Umidade atual:</strong> {umidade !== null ? `${umidade}%` : 'Carregando...'}</p>
           </div>
-        </div>
 
-        <div className="mt-5 flex justify-end gap-3">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300"
-          >
-            Cancelar
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700"
-          >
-            Salvar
-          </button>
-        </div>
+          <div style={buttonsContainerStyle}>
+            <button
+              type="button"
+              onClick={onClose}
+              style={btnCancelStyle}
+              onMouseEnter={() => setCancelHover(true)}
+              onMouseLeave={() => setCancelHover(false)}
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              style={btnSaveStyle}
+              onMouseEnter={() => setSaveHover(true)}
+              onMouseLeave={() => setSaveHover(false)}
+            >
+              Salvar
+            </button>
+          </div>
+        </form>
       </motion.div>
     </div>
   );

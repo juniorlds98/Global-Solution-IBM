@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SensorModal from './SensorModal';
 import Header from './Header'
 
+//Dados mocados para o Caio
 const mockSensores = [
   {
     id: 1,

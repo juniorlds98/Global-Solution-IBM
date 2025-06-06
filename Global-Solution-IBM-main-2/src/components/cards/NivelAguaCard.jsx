@@ -15,7 +15,7 @@ const NivelAguaCard = () => {
       }
     };
 
-    updateWidth(); // valor inicial
+    updateWidth();
 
     window.addEventListener('resize', updateWidth);
     return () => window.removeEventListener('resize', updateWidth);

@@ -31,18 +31,15 @@ const MapaExpandido = () => {
   const position = [-23.5119, -46.6619];
   const [markers, setMarkers] = useState([]);
 
-  // Carregar marcadores do localStorage ao iniciar
   useEffect(() => {
     const savedMarkers = localStorage.getItem('markers');
     if (savedMarkers) {
       setMarkers(JSON.parse(savedMarkers));
     } else {
-      // Se não tiver nada salvo, inicia com marcador padrão
       setMarkers([{ lat: position[0], lng: position[1], description: 'Local inicial' }]);
     }
   }, []);
 
-  // Função para adicionar e salvar no localStorage
   const handleAddMarker = (newMarker) => {
     setMarkers((prev) => {
       const updatedMarkers = [...prev, newMarker];

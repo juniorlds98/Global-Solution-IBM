@@ -60,7 +60,7 @@ const Dashboard = () => {
   return (
     <div>
       <Header/>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '20px' }}>
         <ClimaCard dadosCidade={dadosCidade} />
         <StatusSensorCard sensor={dadosCidade?.sensor} />
         <QuantidadeSensoresCard />
