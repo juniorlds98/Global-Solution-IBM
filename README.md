@@ -4,7 +4,7 @@ O projeto Alerta Rios é uma interface web focada em prever e anunciar alagament
 # 🏁 Objetivo
 
 Fornecer uma oportunidade fácil, responsiva e dinâmica para que as pessoas recebam alertas em seu celular e em qualquer plataforma sobre se a sua residência corre risco de alagamento e quando isso pode acontecer.
-
+## Front End
 ### 🛰️ Tecnologias utilizadas
 
 ⚡ Vite - Build Tool moderna para front-end
@@ -36,7 +36,7 @@ csharp/Copiar/Editar
 ├── vite.config.js            # Configuração Vite
 └── package.json              # Dependências e scripts
 ```
-# 🚱 Funcionalidades do Front-end
+### 🚱 Funcionalidades do Front-end
 
 🔐 Cadastro administrativo
 
@@ -46,7 +46,7 @@ csharp/Copiar/Editar
 
 🗺️ Mapa para marcação e sinalização de novos pontos
 
-# 🖥️ Responsividade
+### 🖥️ Responsividade
 
 A interface do Projeto Alerta Rios foi feito para garantir que as pessoas receberiam e conseguiriam entender como está os rios em sua volta, por isso ele foi projetado para ser funcional em todos os tipos de sistema e telas, garantindo uma clareza visual e respeitando regras de Design em tablets, computadores e celular.
 
@@ -57,6 +57,14 @@ A interface do Projeto Alerta Rios foi feito para garantir que as pessoas recebe
 ❌ Há página de erro caso entre em funções específicas ou não projetadas
 
 
+
+
+
+## ESP32
+A interface se comunica com o módulo ESP32 para notificações e controle de relatórios com a possibilidade de gereniar e visualizar os sensores mais próximos de sua casa, envia dados a cada 5 segundos para nosso back end que por sua vez guarda os dados se for identificado alguma relevancia.
+
+# 🆘 Esclarecimentos sobre o projeto
+Nós não desenvolvemos a página Home por não acreditar que traria algo a mais para o nosso projeto, mas, em compensação caprichamos no desenvolvimento de outras páginas com alguns itens a mais, espero que gostem e supra a expectativa!
 
 # 🚀 Instalação e Execução
 1. Clonar o projeto
@@ -77,12 +85,6 @@ Editar
 npm run dev
 Acesse o front-end em:
 http://localhost:5173
-
-# 🤝 Integração com ESP32
-A interface se comunica com o módulo ESP32 para notificações e controle de relatórios com a possibilidade de gereniar e visualizar os sensores mais próximos de sua casa.
-
-# 🆘 Esclarecimentos sobre o projeto
-Nós não desenvolvemos a página Home por não acreditar que traria algo a mais para o nosso projeto, mas, em compensação caprichamos no desenvolvimento de outras páginas com alguns itens a mais, espero que gostem e supra a expectativa!
 
 # 👨‍💻 Grupo
 ```
