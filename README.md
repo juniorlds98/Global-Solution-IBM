@@ -81,6 +81,9 @@ http://localhost:5173
 # 🤝 Integração com ESP32
 A interface se comunica com o módulo ESP32 Hermes para notificações e controle remoto do atendimento.
 
+# 👨‍💻 Esclarecimentos sobre o projeto
+Nós não desenvolvemos a página Home por não acreditar que traria algo a mais para o nosso projeto, mas, em compensação caprichamos no desenvolvimento de outras páginas com alguns itens a mais, espero que gostem e supra a expectativa!
+
 # 👨‍💻 Grupo
 ```
 Rm: 560753 Caio Martinez Saes
