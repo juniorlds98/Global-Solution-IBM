@@ -82,6 +82,8 @@ http://localhost:5173
 #### - ESP 32 
 #### - Sensor Ultrasonico
 
+### Simulação:
+https://wokwi.com/projects/433053185604931585
 ## Back End
 ### 📌 Funcionalidades principais
 
